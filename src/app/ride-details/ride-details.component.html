@@ -1,0 +1,34 @@
+<div *ngIf="selectedRide" class="ride-details-section">
+  <h3>Ride Details</h3>
+
+  <table class="ride-details-table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Car</th>
+        <th>Seats Left</th>
+        <th>Pick-up Point</th>
+        <th>Destination</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ selectedRide.offerId }}</td>
+        <td>{{ selectedRide.name }}</td>
+        <td>{{ selectedRide.car }}</td>
+        <td>{{ selectedRide.seatsLeft }}</td>
+        <td>{{ selectedRide.pickUp }}</td>
+        <td>{{ selectedRide.destination }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="isBooked" class="message">
+    Booking done. Your booking id : {{ bookingId }}
+  </div>
+
+  <button [ngClass]="{ 'cancel-btn': isBooked, 'book-btn': !isBooked }" (click)="handleBooking()">
+    {{ isBooked ? 'Cancel Booked Ride' : 'Book Ride' }}
+  </button>
+</div>

@@ -1,0 +1,89 @@
+<!-- Header -->
+<div class="header">
+  <h2>🚗 PoolCarz</h2>
+  <button class="logout-btn" (click)="onLogout()">Logout</button>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  <form>
+    <div *ngIf="initialView">
+    <h3>Book a Ride</h3>
+    <p>PoolCarz is an online app that helps users share rides with others.</p>
+    <button type="button" (click)="toggleRides()">{{ toggleButtonLabel }}</button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div *ngIf="!initialView">
+    <div class="button-group">
+      <button type="button" (click)="toggleRides()">{{ toggleButtonLabel }}</button>
+      <button type="button" (click)="filterBy('toOffice')">To Office</button>
+      <button type="button" (click)="filterBy('fromOffice')">From Office</button>
+      <button type="button" (click)="filterBy('others')">Others</button>
+    </div>
+
+    <!-- Ride Selection Info -->
+    <p *ngIf="showRideTable && rides.length">Please select a ride!</p>
+
+    <!-- Ride Table -->
+    <table *ngIf="showRideTable && rides.length">
+      <thead>
+        <tr>
+          <th>Start Point</th>
+          <th>End Point</th>
+          <th>Seats Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          *ngFor="let ride of rides"
+          (click)="selectRide(ride)"
+          [class.highlight]="ride === selectedRide">
+          <td>{{ ride.pickUp }}</td>
+          <td>{{ ride.destination }}</td>
+          <td>{{ ride.seatsLeft }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Ride Details View -->
+    <div *ngIf="selectedRide" class="ride-details">
+      <h4>Ride Details</h4>
+      <table>
+        <tr><th>Id</th><td>{{ selectedRide.offerId }}</td></tr>
+        <tr><th>Name</th><td>{{ selectedRide.name }}</td></tr>
+        <tr><th>Car</th><td>{{ selectedRide.car }}</td></tr>
+        <tr><th>Seats Left</th><td>{{ selectedRide.seatsLeft }}</td></tr>
+        <tr><th>Pick-up Point</th><td>{{ selectedRide.pickUp }}</td></tr>
+        <tr><th>Destination</th><td>{{ selectedRide.destination }}</td></tr>
+      </table>
+
+      <p *ngIf="selectedRide.name === loggedInUser" style="color: red;">
+        You cannot book your own ride!
+      </p>
+
+      <p *ngIf="bookingMessage" style="color: green; font-weight: bold;">
+      {{ bookingMessage }}
+      </p>
+
+
+      <div class="action-buttons">
+        <button type="button" (click)="bookOrCancelRide()" 
+                [disabled]="selectedRide.name === loggedInUser">
+          {{ isBooked ? 'Cancel Booked Ride' : 'Book!' }}
+        </button>
+        <button type="button" (click)="clearSelection()">Back</button>
+      </div>
+    </div>
+    
+
+    <!-- Offer Ride Button and Form -->
+    <button type="button" class="offer-btn" (click)="onOfferRide()">Offer A Ride!</button>
+
+    <app-offer-ride
+      *ngIf="offerRideClicked"
+      (closeForm)="onOfferRideClose()">
+    </app-offer-ride>
+   </div>
+  </form>
+</div>
