@@ -1,0 +1,58 @@
+<div class="form-container">
+  <form [formGroup]="rideForm" (ngSubmit)="onSubmit()" class="form-box">
+    <div class="form-header">Car Ride Registration Form</div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" />
+      <div class="error" *ngIf="submitted && f['name'].errors?.['required']">
+        Name is required
+      </div>
+    </div>
+
+    <!-- Start Location -->
+    <div class="form-group">
+      <label>Start Location</label>
+      <input type="text" formControlName="startLocation" />
+      <div class="error" *ngIf="submitted && f['startLocation'].errors?.['required']">
+        Start Location is required
+      </div>
+    </div>
+
+    <!-- Destination -->
+    <div class="form-group">
+      <label>Destination</label>
+      <input type="text" formControlName="destination" />
+      <div class="error" *ngIf="submitted && f['destination'].errors?.['required']">
+        Destination is required
+      </div>
+    </div>
+
+    <!-- Car -->
+    <div class="form-group">
+      <label>Car</label>
+      <input type="text" formControlName="car" />
+      <div class="error" *ngIf="submitted && f['car'].errors?.['required']">
+        Car is required
+      </div>
+    </div>
+
+    <!-- Seats -->
+    <div class="form-group">
+  <label>Seats Available</label>
+  <input type="number" formControlName="seatsAvailable" />
+
+  <div class="error" *ngIf="rideForm.get('seatsAvailable')?.errors?.['seatRangeInvalid']">
+    Seats should be between 0 and 9
+  </div>
+  </div>
+
+    <!-- Buttons -->
+    <div class="form-buttons">
+      <button type="submit">Submit</button>
+      <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
+
+    </div>
+  </form>
+</div>

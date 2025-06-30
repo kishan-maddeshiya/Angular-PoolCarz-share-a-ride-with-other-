@@ -1,0 +1,6 @@
+[
+  { "id": 1, "offerId": "R101", "name": "John", "car": "Toyota", "seatsLeft": 3, "pickUp": "Vanrose Junction", "destination": "Office" },
+  { "id": 2, "offerId": "R102", "name": "Ravi", "car": "Honda", "seatsLeft": 2, "pickUp": "PTP", "destination": "Office" },
+  { "id": 3, "offerId": "R103", "name": "Priya", "car": "Hyundai", "seatsLeft": 4, "pickUp": "Office", "destination": "East-Fort" },
+  { "id": 4, "offerId": "R104", "name": "Anita", "car": "Ford", "seatsLeft": 5, "pickUp": "Office", "destination": "Central Mall" }
+]
